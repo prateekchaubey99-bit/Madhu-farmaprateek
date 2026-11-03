@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Madhu Farm | Pure Ghee & Dairy</title>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F7F1;--card:#fff;--ink:#1B221D;--mute:#5C675F;--green:#1F3D2B;--gold:#E3A82B;--line:#DDE2D6;--onGreen:#F6F7F1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121712;--card:#1B221D;--ink:#EDF0E7;--mute:#A3AEA5;--green:#9BC9A9;--line:#2D372F;--onGreen:#121712}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito Sans",system-ui,sans-serif;line-height:1.55}
+h1,h2,h3{font-family:"Young Serif",Georgia,serif;font-weight:400;margin:0;line-height:1.15}
+.wrap{max-width:960px;margin:0 auto;padding:0 18px}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.logo{font-family:"Young Serif",Georgia,serif;font-size:1.3rem;color:var(--green)}
+.cartbtn{background:var(--green);color:var(--onGreen);border:0;border-radius:99px;padding:9px 16px;font:700 .95rem "Nunito Sans",sans-serif;cursor:pointer}
+.hero{padding:34px 0 28px}
+.hero h1{font-size:clamp(2.4rem,9vw,4.4rem);color:var(--green);max-width:11ch}
+.hero p{max-width:46ch;color:var(--mute);font-size:1.08rem;margin:16px 0 22px}
+.btn{display:inline-block;background:var(--gold);color:#1B221D;border:0;border-radius:10px;padding:12px 20px;font:700 1rem "Nunito Sans",sans-serif;cursor:pointer;text-decoration:none}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.facts span{border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:.9rem;background:var(--card)}
+section{padding:30px 0}
+h2{font-size:1.8rem;color:var(--green);margin-bottom:6px}
+.sub{color:var(--mute);margin:0 0 18px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:16px}
+.tab{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:7px 16px;font:600 .92rem "Nunito Sans",sans-serif;cursor:pointer}
+.tab.on{background:var(--green);color:var(--onGreen);border-color:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.p{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.p .ph{height:96px;display:grid;place-items:center;font-size:3rem;background:#F3E3B5}
+.p .b{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.p h3{font-size:1.1rem}
+.p small{color:var(--mute)}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px}
+.price{font-weight:700;font-size:1.1rem}
+.add{background:var(--green);color:var(--onGreen);border:0;border-radius:8px;padding:8px 14px;font:700 .9rem "Nunito Sans",sans-serif;cursor:pointer}
+.sell{background:var(--green);color:var(--onGreen);border-radius:18px;padding:26px 20px}
+.sell h2{color:var(--onGreen)}.sell .sub{color:var(--onGreen);opacity:.85}
+.fields{display:grid;gap:10px;max-width:420px}
+label{font-weight:600;font-size:.92rem}
+input,select{width:100%;padding:11px 12px;border-radius:8px;border:1px solid var(--line);font:1rem "Nunito Sans",sans-serif;background:#fff;color:#1B221D;margin-top:4px}
+footer{padding:26px 0 40px;color:var(--mute);font-size:.92rem;border-top:1px solid var(--line);margin-top:20px}
+.drawer{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:2px solid var(--green);border-radius:18px 18px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom,0px));max-height:75vh;overflow:auto;transform:translateY(105%);transition:transform .25s;z-index:20;box-shadow:0 -8px 30px rgba(0,0,0,.18)}
+.drawer.open{transform:none}
+.drawer .in{max-width:560px;margin:0 auto}
+.item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
+.qty button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:1rem;cursor:pointer}
+.qty span{display:inline-block;min-width:24px;text-align:center}
+.total{display:flex;justify-content:space-between;font-weight:700;font-size:1.15rem;margin:14px 0}
+.close{float:right;background:none;border:0;color:var(--mute);font-size:1.6rem;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo">Madhu Farm</div><button class="cartbtn" id="openCart">Cart (<span id="cnt">0</span>)</button></header>
+
+<div class="hero">
+<h1>Pure ghee from our own farm</h1>
+<p>Slow-churned desi ghee, fresh milk, paneer, butter and more. Made on the farm, delivered to your door.</p>
+<a class="btn" href="#shop">Shop dairy products</a>
+<div class="facts"><span>No preservatives</span><span>Fresh every morning</span><span>Order on WhatsApp</span></div>
+</div>
+
+<section id="shop">
+<h2>Buy from Madhu Farm</h2>
+<p class="sub">Tap Add, then send your order on WhatsApp.</p>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+</section>
+
+<section>
+<div class="sell">
+<h2>Sell your dairy to us</h2>
+<p class="sub">Have pure ghee, milk or paneer to sell? Tell us what you have and we will contact you.</p>
+<div class="fields">
+<div><label for="sn">Your name</label><input id="sn" placeholder="Name"></div>
+<div><label for="sp">Product</label><select id="sp"></select></div>
+<div><label for="sq">Quantity (kg or litre)</label><input id="sq" type="number" min="1" placeholder="e.g. 20"></div>
+<div><label for="sr">Your price per unit (₹)</label><input id="sr" type="number" min="1" placeholder="e.g. 600"></div>
+<button class="btn" id="sendSell">Send offer on WhatsApp</button>
+</div>
+</div>
+</section>
+
+<footer>
+<strong>Madhu Farm</strong><br>Basahiya Buzurg, Partawal, Maharajganj, Gorakhpur · Open daily 6 AM to 8 PM<br>Phone / WhatsApp: <span id="ph"></span>
+</footer>
+</div>
+
+<div class="drawer" id="drawer"><div class="in">
+<button class="close" id="closeCart" aria-label="Close cart">×</button>
+<h2>Your order</h2>
+<div id="items"></div>
+<div class="total"><span>Total</span><span id="tot">₹0</span></div>
+<div class="fields" style="max-width:none">
+<div><label for="cn">Your name</label><input id="cn" placeholder="Name"></div>
+<div><label for="ca">Delivery address</label><input id="ca" placeholder="Address"></div>
+<button class="btn" id="order">Place order on WhatsApp</button>
+</div>
+</div></div>
+
+<script>
+// Madhu Farm contact details
+var WHATSAPP = "917081530393"; // country code + number, no + or spaces
+var PHONE = "+91 70815 30393";
+document.getElementById("ph").textContent = PHONE;
+
+var PRODUCTS = [
+ {id:1,n:"Desi Cow Ghee",u:"500 ml",p:650,c:"Ghee",e:"🧈"},
+ {id:2,n:"Desi Cow Ghee",u:"1 litre",p:1250,c:"Ghee",e:"🧈"},
+ {id:3,n:"Buffalo Ghee",u:"1 litre",p:950,c:"Ghee",e:"🫙"},
+ {id:4,n:"Fresh Cow Milk",u:"1 litre",p:60,c:"Milk",e:"🥛"},
+ {id:5,n:"Buffalo Milk",u:"1 litre",p:70,c:"Milk",e:"🥛"},
+ {id:6,n:"Fresh Curd (Dahi)",u:"500 g",p:45,c:"Milk",e:"🍶"},
+ {id:7,n:"Buttermilk (Chaas)",u:"1 litre",p:30,c:"Milk",e:"🥛"},
+ {id:8,n:"Sweet Lassi",u:"250 ml",p:30,c:"Milk",e:"🥤"},
+ {id:9,n:"Fresh Paneer",u:"250 g",p:120,c:"Paneer & Butter",e:"🧀"},
+ {id:10,n:"White Butter",u:"200 g",p:130,c:"Paneer & Butter",e:"🧈"},
+ {id:11,n:"Khoa (Mawa)",u:"250 g",p:150,c:"Paneer & Butter",e:"🍥"}
+];
+var cats = ["All","Ghee","Milk","Paneer & Butter"];
+var cat = "All", cart = {};
+var $ = function(id){return document.getElementById(id)};
+
+function renderTabs(){
+ $("tabs").innerHTML = cats.map(function(c){return '<button class="tab'+(c===cat?' on':'')+'" data-c="'+c+'">'+c+'</button>'}).join("");
+ Array.prototype.forEach.call($("tabs").children,function(b){b.onclick=function(){cat=b.dataset.c;renderTabs();renderGrid()}});
+}
+function renderGrid(){
+ var list = PRODUCTS.filter(function(x){return cat==="All"||x.c===cat});
+ $("grid").innerHTML = list.map(function(x){
+  return '<div class="p"><div class="ph">'+x.e+'</div><div class="b"><h3>'+x.n+'</h3><small>'+x.u+'</small><div class="row"><span class="price">₹'+x.p+'</span><button class="add" data-id="'+x.id+'">Add</button></div></div></div>';
+ }).join("");
+ Array.prototype.forEach.call(document.querySelectorAll(".add"),function(b){b.onclick=function(){change(+b.dataset.id,1);b.textContent="Added";setTimeout(function(){b.textContent="Add"},700)}});
+}
+function change(id,d){
+ cart[id]=(cart[id]||0)+d;
+ if(cart[id]<=0) delete cart[id];
+ renderCart();
+}
+function renderCart(){
+ var ids = Object.keys(cart), total=0, count=0;
+ $("items").innerHTML = ids.length ? ids.map(function(id){
+  var x = PRODUCTS.filter(function(p){return p.id==id})[0], q=cart[id];
+  total += x.p*q; count += q;
+  return '<div class="item"><div><strong>'+x.n+'</strong><br><small>'+x.u+' · ₹'+x.p+'</small></div><div class="qty"><button data-id="'+id+'" data-d="-1" aria-label="Remove one">−</button><span>'+q+'</span><button data-id="'+id+'" data-d="1" aria-label="Add one">+</button></div></div>';
+ }).join("") : '<p class="sub">Your cart is empty. Add a product to start.</p>';
+ Array.prototype.forEach.call($("items").querySelectorAll("button"),function(b){b.onclick=function(){change(+b.dataset.id,+b.dataset.d)}});
+ $("cnt").textContent = count; $("tot").textContent = "₹"+total;
+}
+function wa(text){window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(text),"_blank")}
+
+$("openCart").onclick=function(){$("drawer").classList.add("open")};
+$("closeCart").onclick=function(){$("drawer").classList.remove("open")};
+$("order").onclick=function(){
+ var ids=Object.keys(cart);
+ if(!ids.length){alert("Add at least one product first.");return}
+ var name=$("cn").value.trim(), addr=$("ca").value.trim();
+ if(!name||!addr){alert("Enter your name and delivery address.");return}
+ var lines=ids.map(function(id){var x=PRODUCTS.filter(function(p){return p.id==id})[0];return "- "+x.n+" ("+x.u+") x "+cart[id]+" = ₹"+(x.p*cart[id])}).join("\n");
+ wa("New order for Madhu Farm\n"+lines+"\nTotal: "+$("tot").textContent+"\nName: "+name+"\nAddress: "+addr);
+};
+
+$("sp").innerHTML = PRODUCTS.filter(function(x,i,a){return a.findIndex(function(y){return y.n===x.n})===i}).map(function(x){return "<option>"+x.n+"</option>"}).join("");
+$("sendSell").onclick=function(){
+ var n=$("sn").value.trim(), q=$("sq").value, r=$("sr").value;
+ if(!n||!q||!r){alert("Fill in your name, quantity and price.");return}
+ wa("I want to sell to Madhu Farm\nName: "+n+"\nProduct: "+$("sp").value+"\nQuantity: "+q+"\nPrice per unit: ₹"+r);
+};
+
+renderTabs(); renderGrid(); renderCart();
+</script>
+</body>
+</html>
